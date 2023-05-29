@@ -1,12 +1,12 @@
 # Estudo sobre cmake
 
-## Vscode 
+## Preparando o ambiente de trabalho
 
-Instalar as extensões:
+No diretório `setup` deste projeto, existem scripts preparados para configurar o sistema operacional:
 
 ```bash
-code --install-extension ms-vscode.cpptools-extension-pack
-code --install-extension ms-vscode.cmake-tools
+# para configurar o fedora
+./setup/fedora.sh
 ```
 
 Para executar os testes na mão (filtros não funcionam no zsh):
@@ -19,5 +19,8 @@ build/test/ExampleTests --gtest_filter=*Tux*
 build/test/ExampleTests --gtest_filter=*Mac*
 ```
 
+
+https://developer.fedoraproject.org/tech/languages/c/cpp_installation.html
+https://developer.fedoraproject.org/tech/languages/c/cpp_installation.html
 
 https://www.youtube.com/watch?v=Lp1ifh9TuFI
