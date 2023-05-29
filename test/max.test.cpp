@@ -1,4 +1,4 @@
-#include"../Example.hpp"
+#include<ric/max.hpp>
 #include<gtest/gtest.h>
 
 // Testes simples podem ser declarados como "TEST()"
@@ -42,5 +42,5 @@ TEST_F(ExampleTests, DemonstrationMacros) {
 }
 
 TEST_F(ExampleTests, DemonstrationTux) {
-    EXPECT_EQ(20, tux(20));
+    EXPECT_EQ(20, max(20));
 }

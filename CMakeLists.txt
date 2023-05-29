@@ -1,40 +1,31 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.20)
 
-# define uma variável chamada This, contendo o valor "Example"
-set(This Example)
+project(
+    XProject
+    VERSION 0.1
+    DESCRIPTION "An example project with CMake"
+    LANGUAGES CXX
+)
 
-project(${This} C CXX)
-
-# muda o valor de variáveis existentes
-set(CMAKE_C_STANDARD 99)
-set(CMAKE_CXX_STANDARD 11)
-
-# uma boa configuração para bibliotecas que serão misturadas e vinculadas a executáveis
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# notifica o cmake que teremos testes de unidade
 enable_testing()
 
-# define as dependencias
-add_subdirectory(googletest)
+# as bibliotecas internas
+add_subdirectory(src)
 
-# define os arquivos deste projeto
-set(Headers
-    Example.hpp
-)
-set(Sources
-    Example.cpp
-)
+# os programas
+add_subdirectory(app)
 
-# define as bibliotecas que serão vinculadas para formar o programa
-# quando estiver usando o GoogleTest, ele será o programa principal que utilizará
-# o nosso programa como se fosse uma biblioteca
-add_library(${This} STATIC ${Sources} ${Headers})
-
-# define o subdiretório de testes
+# os programas de testes
 add_subdirectory(test)
 
+# as bibliotecas externas
+add_subdirectory(extern/googletest)
 
-
-
-
+# # Testing only available if this is the main app
+# # Emergency override MODERN_CMAKE_BUILD_TESTING provided as well
+# if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING)
+#    AND BUILD_TESTING)
+#   add_subdirectory(tests)
+# endif()

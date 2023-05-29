@@ -19,6 +19,16 @@ build/test/ExampleTests --gtest_filter=*Tux*
 build/test/ExampleTests --gtest_filter=*Mac*
 ```
 
+configurar
+cmake -S . -B build
+
+build
+cmake --build build
+
+testar
+cmake --build build --target test
+
+https://cliutils.gitlab.io/modern-cmake/chapters/basics/structure.html
 
 https://developer.fedoraproject.org/tech/languages/c/cpp_installation.html
 https://developer.fedoraproject.org/tech/languages/c/cpp_installation.html
