@@ -1,2 +1,4 @@
-googletest/
 build/
+extern/*
+!extern/.gitkeep
+git
