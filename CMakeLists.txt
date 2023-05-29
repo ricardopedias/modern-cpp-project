@@ -8,6 +8,8 @@ project(
 )
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_CXX_STANDARD 23) # googletest exige >= C++14
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 enable_testing()
 
@@ -20,8 +22,16 @@ add_subdirectory(app)
 # os programas de testes
 add_subdirectory(test)
 
-# as bibliotecas externas
-add_subdirectory(extern/googletest)
+include(FetchContent)
+
+# add_subdirectory(extern/googletest)
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG        v1.13.0
+)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 
 # # Testing only available if this is the main app
 # # Emergency override MODERN_CMAKE_BUILD_TESTING provided as well

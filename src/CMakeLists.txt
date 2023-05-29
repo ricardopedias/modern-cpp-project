@@ -2,7 +2,7 @@
 # file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${ModernCMakeExample_SOURCE_DIR}/include/modern/*.hpp")
 set(
     HEADER_LIST
-    "${CMakeExample_SOURCE_DIR}/include/ric/max.hpp"
+    "${XProject_SOURCE_DIR}/include/ric/max.hpp"
 )
 
 # Make an automatic library - will be static or dynamic based on user setting

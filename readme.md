@@ -33,4 +33,6 @@ https://cliutils.gitlab.io/modern-cmake/chapters/basics/structure.html
 https://developer.fedoraproject.org/tech/languages/c/cpp_installation.html
 https://developer.fedoraproject.org/tech/languages/c/cpp_installation.html
 
+https://gitlab.com/CLIUtils/modern-cmake/-/tree/master/examples/extended-project
+
 https://www.youtube.com/watch?v=Lp1ifh9TuFI
