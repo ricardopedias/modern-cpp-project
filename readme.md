@@ -1,38 +1,43 @@
-# Estudo sobre cmake
+# C++ - Estudo sobre CMake
 
 ## Preparando o ambiente de trabalho
 
-No diretório `setup` deste projeto, existem scripts preparados para configurar o sistema operacional:
+No diretório `script` deste projeto, existem scripts preparados para configurar o sistema operacional.
+
+## Compilando e testando
+
+Para efetuar as configurações pré-compilação:
 
 ```bash
-# para configurar o fedora
-./setup/fedora.sh
-```
-
-Para executar os testes na mão (filtros não funcionam no zsh):
-
-```bash
-git clone https://github.com/google/googletest.git
-
-build/test/ExampleTests # executa todos
-build/test/ExampleTests --gtest_filter=*Tux*
-build/test/ExampleTests --gtest_filter=*Mac*
-```
-
-configurar
 cmake -S . -B build
+```
 
-build
+Para compilar:
+
+```bash
 cmake --build build
+```
 
-testar
+Para testar:
+
+```bash
 cmake --build build --target test
+```
 
-https://cliutils.gitlab.io/modern-cmake/chapters/basics/structure.html
+## Estrutura do projeto
 
-https://developer.fedoraproject.org/tech/languages/c/cpp_installation.html
-https://developer.fedoraproject.org/tech/languages/c/cpp_installation.html
+| Diretório | Objetivo |
+| :--:      | :--      |
+| app       | Fonte do programa |
+| extern    | Bibliotecas baixadas manualmente |
+| include   | Interfaces e cabeçalhos |
+| script    | Scripts para configuração via terminal |
+| src       | Fonte das bibliotecas locais do programa |
+| test      | Testes das bibliotecas locais|
 
-https://gitlab.com/CLIUtils/modern-cmake/-/tree/master/examples/extended-project
+## Referência
 
-https://www.youtube.com/watch?v=Lp1ifh9TuFI
+- https://cliutils.gitlab.io/modern-cmake/chapters/basics/structure.html
+- https://developer.fedoraproject.org/tech/languages/c/cpp_installation.html
+- https://gitlab.com/CLIUtils/modern-cmake/-/tree/master/examples/extended-project
+- https://www.youtube.com/watch?v=Lp1ifh9TuFI

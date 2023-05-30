@@ -15,7 +15,7 @@ target_include_directories(max_lib PUBLIC ../include)
 # target_link_libraries(max_lib PRIVATE Boost::boost)
 
 # All users of this library will need at least C++11
-target_compile_features(max_lib PUBLIC cxx_std_11)
+target_compile_features(max_lib PUBLIC cxx_std_23)
 
 # IDEs should put the headers in a nice place
 # source_group(
