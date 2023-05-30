@@ -15,9 +15,9 @@ de construção.
 
 | Ramo | Objetivo |
 |:-- | :-- |
-| main | Estrutura |
-| cmake | Configuração com CMake |
-| xmake | Configuração com XMake |
+| main | Estrutura limpa |
+| cmake | Estrutura com CMake |
+| xmake | Estrutura com XMake |
 
 Pra acessar a documentação de uma ferramenta específica, basta consultar o ramo
 correspondente deste repositósio.
