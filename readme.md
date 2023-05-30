@@ -1,30 +1,56 @@
-# C++ - Estudo sobre CMake
+# Construção de programas C++
 
-## Preparando o ambiente de trabalho
+## Objetivo
 
-No diretório `script` deste projeto, existem scripts preparados para configurar o sistema operacional.
+O propósito deste projeto é entender o processo de construção de projetos modernos
+escritos em C++ nos diversos ambientes e sistemas operacionais. 
 
-## Compilando e testando
+## Os ramos existentes (branchs)
 
-Para efetuar as configurações pré-compilação:
+No ramo principal (branch main) se encontra uma estrutura de diretórios moderna
+mas sem nenhuma ferramenta de construção.
+
+No ramo "setup" se encontram diversos scripts para agilizar a instalação das 
+ferramentas necessárias para diversos sistemas operacionais.
+
+Nos outros ramos, a mesma estrutura é preparada usando diferentes ferramentas 
+de construção.
+
+| Ramo | Objetivo |
+|:-- | :-- |
+| main | Estrutura |
+| setup | Scripts de instalação |
+| cmake | Configuração com CMake |
+| xmake | Configuração com XMake |
+
+Pra acessar a documentação de uma ferramenta específica, basta consultar o ramo
+correspondente deste repositósio.
+
+## Preparando o ambiente
+
+Para agilizar o processo, foram criados scripts que facilitam a preparação do
+ambiente em diversas plataformas. O objetivo é possibilitar uma configuração rápida, 
+principalmente para novos ambientes limpos ou virtualizados.
+
+No ramo `script`, existem opções para diversos sistemas operacionais.
 
 ```bash
-cmake -S . -B build
-```
+# entra no ramo setup
+git checkout setup
 
-Para compilar:
+# para configurar o fedora 38 com cmake
+script/setup.sh --fedora --38 --cmake
 
-```bash
-cmake --build build
-```
+# para configurar o ubuntu 23.04 com xmake
+script/setup.sh --ubuntu --23.04 --xmake
 
-Para testar:
-
-```bash
-cmake --build build --target test
+# atualiza os scripts do em todos os branchs
+script/setup.sh --sync 
 ```
 
 ## Estrutura do projeto
+
+A seguinte estrutura foi utilizada, como descrito a seguir:
 
 | Diretório | Objetivo |
 | :--:      | :--      |
@@ -33,11 +59,14 @@ cmake --build build --target test
 | include   | Interfaces e cabeçalhos |
 | script    | Scripts para configuração via terminal |
 | src       | Fonte das bibliotecas locais do programa |
-| test      | Testes das bibliotecas locais|
+| test      | Testes das bibliotecas locais |
 
-## Referência
+## Referências
 
-- https://cliutils.gitlab.io/modern-cmake/chapters/basics/structure.html
-- https://developer.fedoraproject.org/tech/languages/c/cpp_installation.html
-- https://gitlab.com/CLIUtils/modern-cmake/-/tree/master/examples/extended-project
+Algumas referências utilizadas para consulta de informações e ajuda no entendimento
+dos processos de compilação.
+
+- [https://cliutils.gitlab.io](https://cliutils.gitlab.io/modern-cmake/chapters/basics/structure.html)
+- [https://developer.fedoraproject.org](https://developer.fedoraproject.org/tech/languages/c/cpp_installation.html)
+- [https://gitlab.com/CLIUtils/modern-cmake](https://gitlab.com/CLIUtils/modern-cmake/-/tree/master/examples/extended-project)
 - https://www.youtube.com/watch?v=Lp1ifh9TuFI
