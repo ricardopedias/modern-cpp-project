@@ -10,16 +10,12 @@ escritos em C++ nos diversos ambientes e sistemas operacionais.
 No ramo principal (branch main) se encontra uma estrutura de diretórios moderna
 mas sem nenhuma ferramenta de construção.
 
-No ramo "setup" se encontram diversos scripts para agilizar a instalação das 
-ferramentas necessárias para diversos sistemas operacionais.
-
 Nos outros ramos, a mesma estrutura é preparada usando diferentes ferramentas 
 de construção.
 
 | Ramo | Objetivo |
 |:-- | :-- |
 | main | Estrutura |
-| setup | Scripts de instalação |
 | cmake | Configuração com CMake |
 | xmake | Configuração com XMake |
 
@@ -32,20 +28,17 @@ Para agilizar o processo, foram criados scripts que facilitam a preparação do
 ambiente em diversas plataformas. O objetivo é possibilitar uma configuração rápida, 
 principalmente para novos ambientes limpos ou virtualizados.
 
-No ramo `script`, existem opções para diversos sistemas operacionais.
+No diretório `script`, existem opções para diversos sistemas operacionais.
 
 ```bash
-# entra no ramo setup
-git checkout setup
+# para instruções de uso
+script/setup.sh
 
 # para configurar o fedora 38 com cmake
 script/setup.sh --fedora --38 --cmake
 
 # para configurar o ubuntu 23.04 com xmake
 script/setup.sh --ubuntu --23.04 --xmake
-
-# atualiza os scripts do em todos os branchs
-script/setup.sh --sync 
 ```
 
 ## Estrutura do projeto
@@ -57,7 +50,7 @@ A seguinte estrutura foi utilizada, como descrito a seguir:
 | app       | Fonte do programa |
 | extern    | Bibliotecas baixadas manualmente |
 | include   | Interfaces e cabeçalhos |
-| script    | Scripts para configuração via terminal |
+| script    | Scripts para operações via terminal |
 | src       | Fonte das bibliotecas locais do programa |
 | test      | Testes das bibliotecas locais |
 
