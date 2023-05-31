@@ -1,23 +1,4 @@
 
-showHeader()
-{
-    showInfo "--" none
-    showSuccess $1 none
-    showMuted $2 none
-    showInfo "--" none
-
-    echo ""
-}
-
-showFooter()
-{
-    echo ""
-    
-    showInfo "--" none
-    showSuccess $1 none
-    showInfo "--" none
-}
-
 showText()
 {
     COLOR_BLUE='\e[0;34m'
@@ -36,7 +17,7 @@ showText()
         *) COLOR=$COLOR_NC ;;
     esac
 
-    case $3 in 
+    case $2 in 
         "danger") ICON="✖" ;;
         "ok") ICON="✔" ;;
         "dot") ICON="●" ;;
@@ -45,10 +26,8 @@ showText()
         *) ICON=" " ;;
     esac
 
-    MESSAGE="$2"
-
-    # substitui underscore por espaco
-    MESSAGE=${MESSAGE//_/" "}
+    # o conteúdo a partir da 3 opção deve ser considerado um texto
+    MESSAGE=$(echo "$@" | cut -d" " -f3-99)
 
     if [[ "$MESSAGE" == "--" ]]; then
         MESSAGE="----------------------------------------------------------"
@@ -59,66 +38,165 @@ showText()
 
 showError()
 {
-    ICON="danger"
-
-    if [[ ! -z "$2" ]]; then
-        ICON="$2"
-    fi 
-
-    showText red $1 $ICON
+    showText red danger $@
 }
 
 showInfo()
 {
-    ICON="hand"
-
-    if [[ ! -z "$2" ]]; then
-        ICON="$2"
-    fi 
-
-    showText blue $1 $ICON
+    showText blue hand $@
 }
 
 showMuted()
 {
-    ICON="none"
-
-    if [[ ! -z "$2" ]]; then
-        ICON="$2"
-    fi 
-
-    showText gray $1 $ICON
+    showText gray none $@
 }
 
 showSuccess()
 {
-    ICON="ok"
-
-    if [[ ! -z "$2" ]]; then
-        ICON="$2"
-    fi 
-
-    showText green $1 $ICON
+    showText green ok $@
 }
 
 showWarning()
 {
-    ICON="dot"
-
-    if [[ ! -z "$2" ]]; then
-        ICON="$2"
-    fi 
-
-    showText yellow $1 $ICON
+    showText yellow dot $@
 }
 
-showList()
+showItem()
 {
-    ICON="arrow"
+    showText none arrow $@
+}
 
-    if [[ ! -z "$2" ]]; then
-        ICON="$2"
-    fi 
+showCheckbox()
+{
+    COLOR_BLUE='\e[0;34m'
+    COLOR_GREEN='\e[1;32m'
+    COLOR_RED='\e[1;31m'
+    COLOR_NC='\e[0m'
+    
+    MESSAGE=$(echo "$@" | cut -d" " -f2-99)
+    CHECK="${COLOR_GREEN}[OK]"
 
-    showText none $1 $ICON
+    if [[ "$1" == "no" ]]; then
+        CHECK="${COLOR_RED}[Não instalado]"
+    fi
+
+    echo -e "${COLOR_BLUE}   $MESSAGE $CHECK ${COLOR_NC}"
+}
+
+# extrai a lista de pares parâmetro=valor
+parseArgumentPairs()
+{
+    ARGS=$@
+
+    # remove os espaços, para juntar todas as opções
+    ARGS=${ARGS//" "/"="}
+
+    # adiciona espaços apenas antes dos sinalizadores -- e -
+    ARGS=${ARGS//"=--"/" --"}
+    ARGS=${ARGS//"=-"/" -"}
+
+    # libera uma lista com pares de opção=valor
+    echo $ARGS
+}
+
+# Extrai o nome do parâmetro de um par
+pairKey()
+{
+    PAIR=${1//"="/" "}
+    for NODE in $PAIR
+    do
+        echo ${NODE//"-"/""}
+        return
+    done
+}
+
+# Extrai o valor de um par
+pairValue()
+{
+    KEY="none"
+    VALUE="none"
+
+    PAIR=${1//"="/" "}
+
+    for NODE in $PAIR
+    do
+        if [[ "$KEY" == "none" ]]; then
+            KEY="$NODE"
+        fi
+
+        VALUE="$NODE"
+    done
+
+    if [[ "$KEY" == "$VALUE" ]]; then
+        echo "1"
+        return
+    fi
+
+    echo ${VALUE//"-"/""}
+}
+
+showHelp()
+{
+    showSection "Setup: Ajuda"
+    showSection
+    echo ""
+    showHelpHeader $1
+    echo ""
+    showHelpOptions
+    echo ""
+    showSection
+    exit 0
+}
+
+showHelpShort()
+{
+    showSection "Setup: Ajuda"
+    showSection
+    echo ""
+    showHelpHeader $1
+    echo ""
+    showSection
+    exit 0
+}
+
+showHelpHeader()
+{
+    if [[ "$1" != "" ]]; then
+        showError $1
+        echo ""
+    fi
+
+    showText blue none "Modo de uso: setup.sh <opções>"
+    echo ""
+    showText blue none "Exemplos:"
+    echo ""
+    showMuted "setup.sh -s fedora -r 39 -a"
+    showMuted "setup.sh --system=ubuntu --release=23.04 --all"
+}
+
+
+showHelpOptions()
+{
+    showText blue none "Opções:" none
+    echo ""
+    showMuted "-h|--help......Exibe_essa_ajuda"
+    showMuted "-s|--system....Tipo de sistema: Ex: fedora, ubuntu, windows, macos"
+    showMuted "-r|--release...Versão do sistema. Ex: 38, 23.04, etc"
+    showMuted "-a|--all.......Efetua todas as instalações e configurações"
+    showMuted "--cmake........Instala o cmake como builder"
+    showMuted "--xmake........Instala o xmake como builder"
+    showMuted "--git..........Instala e configura o Git"
+    showMuted "--chrome.......Instala o Google Chrome"
+    showMuted "--ssh..........Instala e configura o SSH e a chave para o GitHub"
+    showMuted "--vscode.......Instala e configura o Visual Studio Code"
+    showMuted "--zsh..........Instala e configura o Oh My Zsh"
+}
+
+showSection()
+{
+    showText blue none "--"
+
+    if [[ "$1" != "" ]]; then
+        showText green none $1
+    fi
 }

@@ -43,11 +43,11 @@ no diretório `script`:
 # para instruções de uso
 script/setup.sh
 
-# para configurar o fedora 38 com cmake
-script/setup.sh --fedora --38 --cmake
+# para configurar e instalar todas as ferramentas no fedora 38
+script/setup.sh -s fedora -r 38 -a
 
-# para configurar o ubuntu 23.04 com xmake
-script/setup.sh --ubuntu --23.04 --xmake
+# para instalar e configurar somente o xmake no ubuntu 23.04
+script/setup.sh -s ubuntu -r 23.04 --xmake
 ```
 
 ## Referências
