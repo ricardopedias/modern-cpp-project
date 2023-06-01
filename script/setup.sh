@@ -81,13 +81,25 @@ if [[ "$OPTION_RELEASE" == "none" ]]; then
     showHelpShort "Versão do sistema não fornecido"
 fi
 
-SCRIPT_FILE="$SCRIPT_DIR/include/${OPTION_SYSTEM}_${OPTION_RELEASE//"."/"_"}/main.sh"
+if [[ "$OPTION_SYSTEM" == "fedora" ]] && [[ "36,37,38" == *"$OPTION_RELEASE"* ]]; then
+    SCRIPT_FILE="$SCRIPT_DIR/include/${OPTION_SYSTEM}_38/main.sh"
+else
+    SCRIPT_FILE="$SCRIPT_DIR/include/${OPTION_SYSTEM}_${OPTION_RELEASE//"."/""}/main.sh"
+fi
 
 if [[ ! -f "$SCRIPT_FILE" ]]; then
-    showError "O sistema ${OPTION_SYSTEM^} ${OPTION_RELEASE} não é suportado!"
+    showSection
+    showError "${OPTION_SYSTEM^} ${OPTION_RELEASE} não é suportado!"
+    showSupport
     exit $EXIT_WITH_ERROR
 fi
 
+showSection "Preparando o sistema ${OPTION_SYSTEM^} $OPTION_RELEASE"
+showSection
+
 source $SCRIPT_FILE
+
+showSection "Tudo pronto!"
+showSection
 
 exit $EXIT_WITH_SUCCESS

@@ -1,4 +1,14 @@
 
+showSupport()
+{
+    showText none none "Os sistemas suportados são:"
+    showText blue arrow "fedora 36, 37, 38"
+    showText blue arrow "ubuntu 22.10, 23.04, 23.04"
+    showText blue arrow "windows 10, 11"
+
+    showSection
+}
+
 showText()
 {
     COLOR_BLUE='\e[0;34m'
